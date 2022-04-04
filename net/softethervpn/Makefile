@@ -40,12 +40,12 @@ HOST_MAKE_FLAGS += -C $(HOST_BUILD_DIR)
 HOST_MAKE_FLAGS += \
 	-f src/makefiles/$(if $(CONFIG_HOST_OS_MACOS),macos,linux)_$(if $(shell uname -m | grep 64),64,32)bit.mak
 
-HOST_LDFLAGS += -Wl,-rpath$(comma)$(STAGING_DIR_HOSTPKG)/lib
 # Prevent calling upstream configure
 define Host/Configure
 endef
 
 HOST_CFLAGS += $(if $(CONFIG_HOST_OS_MACOS),-Wno-implicit-function-declaration,)
+HOST_LDFLAGS += -Wl,-rpath$(comma)$(STAGING_DIR_HOSTPKG)/lib
 
 define Host/Compile
 	# Build hamcorebuilder using host compiler and let it generate

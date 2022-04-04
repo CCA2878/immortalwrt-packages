@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=brook
-PKG_VERSION:=20220401
+PKG_VERSION:=20220406
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/txthinking/brook/tar.gz/v$(PKG_VERSION)?
-PKG_HASH:=cd3c467d23f4677c51e6764e0a3203cf39ac6c1081203bfd9f5c79680317be22
+PKG_HASH:=cf4433263cc755edfe56be66d206b7ee5083faaaa8b30bb4102174ad73e22764
 
 PKG_MAINTAINER:=Tianling Shen <cnsztl@immortalwrt.org>
 PKG_LICENSE:=GPL-3.0

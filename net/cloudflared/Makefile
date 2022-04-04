@@ -5,12 +5,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cloudflared
-PKG_VERSION:=2022.3.1
+PKG_VERSION:=2022.3.4
 PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/cloudflare/cloudflared/tar.gz/$(PKG_VERSION)?
-PKG_HASH:=e3459bc83d9749d89d93e6ab2dcbc51872568d1fb144d7ab7d3656b29785e364
+PKG_HASH:=e810ccc855cc25e8a2f33b42d33570edf97856b227baf4ca0def8e47a4b8d387
 
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
@@ -46,7 +46,19 @@ define Package/cloudflared/description
 endef
 
 define Package/cloudflared/conffiles
-/root/.cloudflared/
+/etc/config/cloudflared
+/etc/cloudflared/
+endef
+
+define Package/cloudflared/install
+	$(call GoPackage/Package/Install/Bin,$(1))
+
+	$(INSTALL_DIR) $(1)/etc/cloudflared/
+	$(INSTALL_CONF) $(CURDIR)/files/sample_config.yml $(1)/etc/cloudflared/config.yml
+	$(INSTALL_DIR) $(1)/etc/config/
+	$(INSTALL_CONF) $(CURDIR)/files/cloudflared.config $(1)/etc/config/cloudflared
+	$(INSTALL_DIR) $(1)/etc/init.d/
+	$(INSTALL_BIN) $(CURDIR)/files/cloudflared.init $(1)/etc/init.d/cloudflared
 endef
 
 $(eval $(call GoBinPackage,cloudflared))
